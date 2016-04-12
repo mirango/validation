@@ -1,7 +1,7 @@
 package validation
 
 import (
-	"github.com/wlMalk/mirango/framework"
+	"github.com/mirango/framework"
 )
 
 type Validator interface {

@@ -3,7 +3,7 @@ package validation
 import (
 	"strconv"
 
-	"github.com/wlMalk/mirango/framework"
+	"github.com/mirango/framework"
 )
 
 type Value struct {

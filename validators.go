@@ -3,7 +3,7 @@ package validation
 import (
 	"regexp"
 
-	"github.com/wlMalk/mirango/framework"
+	"github.com/mirango/framework"
 )
 
 var (
@@ -49,4 +49,3 @@ func StringRegexp(pstr string) Validator {
 		return nil
 	}, MsgRegexp.Msg(p.String()))
 }
-
