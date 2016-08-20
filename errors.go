@@ -9,6 +9,19 @@ type err struct {
 	Values map[string]interface{}
 }
 
+func NewError(msg string, values ...interface{}) *err {
+	if len(values)%2 != 0 {
+		return nil
+	}
+
+	e := &err{}
+	e.Msg = msg
+	for i := 0; i < len(values); i = i + 2 {
+		e.Values[fmt.Sprint(values[i])] = values[i+1]
+	}
+	return e
+}
+
 func (e *err) Error() string {
 	return e.Msg
 }
@@ -23,7 +36,7 @@ func (e Error) Append(name string, err ...error) {
 	e[name] = append(e[name], err...)
 }
 
-func (e Error) Set(name string, err []error) {
+func (e Error) Set(name string, err ...error) {
 	e[name] = err
 }
 
