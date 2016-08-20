@@ -7,8 +7,9 @@ import (
 )
 
 var (
-	RegexpNumber = regexp.MustCompile("[0-9]+")
-	RegexpAlpha  = regexp.MustCompile("[a-zA-Z]+")
+	RegexpNumber = regexp.MustCompile("^[0-9]+$")
+	RegexpFloat  = regexp.MustCompile("^[+-]{0,1}([0-9]*[.])?[0-9]+$")
+	RegexpAlpha  = regexp.MustCompile("^[a-zA-Z]+$")
 )
 
 func Eq(a interface{}) Validator {
@@ -42,10 +43,5 @@ func StringRegexp(pstr string) Validator {
 	if err != nil {
 		return nil
 	}
-	return NewFuncValidator(func(c framework.Context, v framework.ParamValue) error {
-		if !p.MatchString(v.RawString()) {
-			return ErrRegexp.Err([]interface{}{v.Name(), p.String()}...)
-		}
-		return nil
-	}, MsgRegexp.Msg(p.String()))
+	return Regexp(p)
 }
